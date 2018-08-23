@@ -18,6 +18,12 @@ public interface UserService {
 	public void saveAcademies(AcademicQualification academies);
 	public void saveExperience(Experience experience);
 	
-	public void deleteEntry(String ProfileId);
+	public void deleteCertificate(Certificates certificate);
+	public void deleteSkill(Skills skill);
+	public void deleteProject(Projects project);
+	public void deleteLocation(Location location);
+	public void deleteAcademies(AcademicQualification academies);
+	public void deleteExperience(Experience experience);
+	
 	public User updateEntry(User user, String ProfileId);
 }

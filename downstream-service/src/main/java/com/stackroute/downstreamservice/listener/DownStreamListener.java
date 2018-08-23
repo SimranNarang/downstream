@@ -82,6 +82,9 @@ public class DownStreamListener {
 		if(experience.getMessage().equals("save")) {
 			userService.saveExperience(experience);
 		}
+		else if(experience.getMessage().equals("delete")){
+			userService.deleteExperience(experience);
+		}
 	}
 
 	@StreamListener(AcademiesStream.INPUT)
@@ -103,6 +106,9 @@ public class DownStreamListener {
 		 */
 		if(location.getMessage().equals("save")) {
 			userService.saveLocation(location);
+		}
+		else if(location.getMessage().equals("delete")) {
+			userService.deleteLocation(location);
 		}
 		
 	}
@@ -128,6 +134,9 @@ public class DownStreamListener {
 		if(project.getMessage().equals("save")) {
 			userService.saveProject(project);
 		}
+		else if(project.getMessage().equals("delete")){
+			userService.deleteProject(project);
+		}
 		
 	}
 
@@ -140,6 +149,9 @@ public class DownStreamListener {
 		if(skills.getMessage().equals("save")) {
 			userService.saveSkill(skills);
 		}
+		else if(skills.getMessage().equals("delete")) {
+			userService.deleteSkill(skills);
+		}
 		
 	}
 
@@ -151,7 +163,10 @@ public class DownStreamListener {
 		 */
 		if(certificates.getMessage().equals("save")) {
 			userService.saveCertificate(certificates);
-		}		
+		}	
+		else if(certificates.getMessage().equals("delete")) {
+			userService.deleteCertificate(certificates);
+		}
 	}
 	
 	@StreamListener(UserStream.INPUT)
@@ -163,8 +178,4 @@ public class DownStreamListener {
 		userRepo.save(user);
 		logger.info(user.toString() + " user");
 	}
-	
-	
-	
-
 }

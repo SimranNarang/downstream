@@ -32,7 +32,9 @@ public class UserServiceImpl implements UserService{
 		super();
 		this.userRepo = userRepo;
 	}
-
+	
+/*	-------save services for each microservice chicklet--------*/
+	
 	@Override
 	public void saveCertificate(Certificates certificates) {
 		opt = userRepo.findById(certificates.getProfileId());
@@ -141,14 +143,110 @@ public class UserServiceImpl implements UserService{
 		userRepo.save(user);
 	}
 	
+	/*	-------delete services for each microservice chicklet--------*/
+	
+
+//	@Override
+//	public User updateEntry(User user, String username) {
+//			user.setUsername(username);
+//			return userRepo.save(user);
+//	}
+
 	@Override
-	public void deleteEntry(String username) {
-		userRepo.deleteById(username);
+	public void deleteCertificate(Certificates certificate) {
+		opt = userRepo.findById(certificate.getProfileId());
+		user = opt.get();
+		List<Certificates> list;
+		if (user.getCertificates() == null)
+			list = new ArrayList<>();
+		else
+			list = user.getCertificates();
+
+		list.remove(certificate);
+		user.setCertificates(list);
+		user.setUsername(certificate.getProfileId());
+		userRepo.save(user);	}
+
+	@Override
+	public void deleteSkill(Skills skill) {
+		opt = userRepo.findById(skill.getProfileId());
+		user = opt.get();
+		List<Skills> list;
+		if (user.getSkills() == null)
+			list = new ArrayList<>();
+		else
+			list = user.getSkills();
+
+		list.remove(skill);
+		user.setSkills(list);
+		userRepo.save(user);
 	}
 
 	@Override
-	public User updateEntry(User user, String username) {
-			user.setUsername(username);
-			return userRepo.save(user);
+	public void deleteProject(Projects project) {
+		List<Projects> list;
+		opt = userRepo.findById(project.getProfileId());
+		user = opt.get();
+
+		if (user.getProject() == null)
+			list = new ArrayList<>();
+		else
+			list = user.getProject();
+
+		list.remove(project);
+		user.setProject(list);
+		userRepo.save(user);
+	}
+
+	@Override
+	public void deleteLocation(Location location) {
+		opt = userRepo.findById(location.getProfileId());
+		user = opt.get();
+		List<Location> list;
+		if (user.getLocation() == null)
+			list = new ArrayList<>();
+		else
+			list = user.getLocation();
+
+		list.remove(location);
+		user.setLocation(list);
+		userRepo.save(user);
+	}
+
+	@Override
+	public void deleteAcademies(AcademicQualification academies) {
+		opt = userRepo.findById(academies.getProfileId());
+		user = opt.get();
+		List<AcademicQualification> list;
+		if (user.getExperience() == null)
+			list = new ArrayList<>();
+		else
+			list = user.getAcademics();
+		list.remove(academies);
+		user.setAcademics(list);
+		logger.info(academies.toString() + " academies");
+		userRepo.save(user);
+		
+	}
+
+	@Override
+	public void deleteExperience(Experience experience) {
+		opt = userRepo.findById(experience.getProfileId());
+		user = opt.get();
+		List<Experience> list;
+		if (user.getExperience() == null)
+			list = new ArrayList<>();
+		else
+			list = user.getExperience();
+		list.remove(experience);
+		user.setExperience(list);
+		user.setUsername(experience.getProfileId());
+		userRepo.save(user);
+	}
+
+	@Override
+	public User updateEntry(User user, String ProfileId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
