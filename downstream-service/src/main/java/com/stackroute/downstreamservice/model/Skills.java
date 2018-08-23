@@ -17,7 +17,7 @@ public class Skills {
 	private String level;
 	private String noOfMonths;
 	private String furtherUsage;
-	// aprivate String message;
+	private String message;
 	public String getProfileId() {
 		return profileId;
 	}
@@ -47,6 +47,12 @@ public class Skills {
 	}
 	public void setFurtherUsage(String furtherUsage) {
 		this.furtherUsage = furtherUsage;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 }

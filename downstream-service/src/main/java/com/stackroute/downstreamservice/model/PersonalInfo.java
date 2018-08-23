@@ -17,6 +17,8 @@ public class PersonalInfo {
 	private String dob;
 	private String age;
 	private String gender;
+	private String message;
+	
 	public String getProfileId() {
 		return profileId;
 	}
@@ -95,5 +97,13 @@ public class PersonalInfo {
 	private String linkedin;
 	private String github;
 	private String bloodGroup;
+
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
 
 }

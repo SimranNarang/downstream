@@ -20,7 +20,7 @@ public class Location {
 	private String pin;
 	private String state;
 	private String country;
-	// private String message;
+	private String message;
 	public String getProfileId() {
 		return profileId;
 	}
@@ -57,6 +57,11 @@ public class Location {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 }

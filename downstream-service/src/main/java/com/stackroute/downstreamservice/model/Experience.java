@@ -18,7 +18,7 @@ public class Experience {
 	private String role;
 	private String startDate;
 	private String endDate;
-	//private String message;
+	private String message;
 	public String getProfileId() {
 		return profileId;
 	}
@@ -49,5 +49,10 @@ public class Experience {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 }

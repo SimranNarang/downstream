@@ -20,6 +20,7 @@ import com.stackroute.downstreamservice.model.Projects;
 import com.stackroute.downstreamservice.model.Skills;
 import com.stackroute.downstreamservice.model.User;
 import com.stackroute.downstreamservice.repository.UserRepository;
+import com.stackroute.downstreamservice.service.UserService;
 import com.stackroute.downstreamservice.stream.AcademiesStream;
 import com.stackroute.downstreamservice.stream.ExperienceStream;
 import com.stackroute.downstreamservice.stream.LocationStream;
@@ -52,10 +53,9 @@ public class DownStreamListener {
 	 * projectRepository; private SkillsRepository skillsRepository; private
 	 * TrainingRepository trainingRepository;
 	 */
-	private UserRepository userRepository;
+	private UserService userService;
+	private UserRepository userRepo;
 
-	private Optional<User> opt;
-	private User user;
 
 	/*
 	 * @Autowired public DownStreamListener(AcademiesRepository academiesRepository,
@@ -73,23 +73,15 @@ public class DownStreamListener {
 	 * userRepository; this.user = user; }
 	 */
 	@Autowired
-	public DownStreamListener(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public DownStreamListener(UserRepository userRepo) {
+		this.userRepo = userRepo;
 	}
 
 	@StreamListener(ExperienceStream.INPUT)
 	public void experiencePost(@Payload Experience experience) {
-		opt = userRepository.findById(experience.getProfileId());
-		user = opt.get();
-		List<Experience> list;
-		if (user.getExperience() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getExperience();
-		list.add(experience);
-		user.setExperience(list);
-		user.setUsername(experience.getProfileId());
-		userRepository.save(user);
+		if(experience.getMessage().equals("save")) {
+			userService.saveExperience(experience);
+		}
 	}
 
 	@StreamListener(AcademiesStream.INPUT)
@@ -98,17 +90,9 @@ public class DownStreamListener {
 		 * try { academiesRepository.save(academies); } catch (Exception e) {
 		 * logger.info("Error in saving"); }
 		 */
-		opt = userRepository.findById(academies.getProfileId());
-		user = opt.get();
-		List<AcademicQualification> list;
-		if (user.getExperience() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getAcademics();
-		list.add(academies);
-		user.setAcademics(list);
-		logger.info(academies.toString() + " academies");
-		userRepository.save(user);
+		if(academies.getMessage().equals("save")) {
+			userService.saveAcademies(academies);
+		}		
 	}
 
 	@StreamListener(LocationStream.INPUT)
@@ -117,19 +101,10 @@ public class DownStreamListener {
 		 * try { locationRepository.save(location); } catch (Exception e) {
 		 * logger.info("Error in saving"); }
 		 */
-		opt = userRepository.findById(location.getProfileId());
-		user = opt.get();
-		List<Location> list;
-		if (user.getLocation() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getLocation();
-
-		list.add(location);
-		user.setLocation(list);
-		userRepository.save(user);
-
-		logger.info(location.toString() + " location");
+		if(location.getMessage().equals("save")) {
+			userService.saveLocation(location);
+		}
+		
 	}
 
 	@StreamListener(PersonalInfoStream.INPUT)
@@ -138,11 +113,10 @@ public class DownStreamListener {
 		 * try { personalInfoRepository.save(personalInfo); } catch (Exception e) {
 		 * logger.info("Error in saving"); }
 		 */
-		user.setPersonalInfo(personalInfo);
-		user.setUsername(personalInfo.getProfileId());
-		userRepository.save(user);
-
-		logger.info(personalInfo.toString() + " personal info");
+		if(personalInfo.getMessage().equals("save")) {
+			userService.savePersonalInfo(personalInfo);
+		}
+		
 	}
 
 	@StreamListener(ProjectStream.INPUT)
@@ -151,19 +125,10 @@ public class DownStreamListener {
 		 * try { projectRepository.save(project); } catch (Exception e) {
 		 * logger.info("Error in saving"); }
 		 */
-		List<Projects> list;
-		opt = userRepository.findById(project.getProfileId());
-		user = opt.get();
-
-		if (user.getProject() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getProject();
-
-		list.add(project);
-		user.setProject(list);
-		userRepository.save(user);
-		logger.info(project.toString() + " project");
+		if(project.getMessage().equals("save")) {
+			userService.saveProject(project);
+		}
+		
 	}
 
 	@StreamListener(SkillsStream.INPUT)
@@ -172,20 +137,10 @@ public class DownStreamListener {
 		 * try { skillsRepository.save(skills); } catch (Exception e) {
 		 * logger.info("Error in saving"); }
 		 */
-
-		opt = userRepository.findById(skills.getProfileId());
-		user = opt.get();
-		List<Skills> list;
-		if (user.getSkills() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getSkills();
-
-		list.add(skills);
-		user.setSkills(list);
-		userRepository.save(user);
-
-		logger.info(skills.toString() + " skills");
+		if(skills.getMessage().equals("save")) {
+			userService.saveSkill(skills);
+		}
+		
 	}
 
 	@StreamListener(TrainingStream.INPUT)
@@ -194,31 +149,22 @@ public class DownStreamListener {
 		 * try { trainingRepository.save(training); } catch (Exception e) {
 		 * logger.info("Error in saving"); }
 		 */
-
-		opt = userRepository.findById(certificates.getProfileId());
-		user = opt.get();
-		List<Certificates> list;
-		if (user.getCertificates() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getCertificates();
-
-		list.add(certificates);
-		user.setCertificates(list);
-		user.setUsername(certificates.getProfileId());
-		userRepository.save(user);
-
-		logger.info(certificates.toString() + " training");
+		if(certificates.getMessage().equals("save")) {
+			userService.saveCertificate(certificates);
+		}		
 	}
-
+	
 	@StreamListener(UserStream.INPUT)
 	public void userPost(@Payload User user) {
 		/*
 		 * try { userRepository.save(user); } catch (Exception e) {
 		 * logger.info("Error in saving"); }
 		 */
-		userRepository.save(user);
+		userRepo.save(user);
 		logger.info(user.toString() + " user");
 	}
+	
+	
+	
 
 }

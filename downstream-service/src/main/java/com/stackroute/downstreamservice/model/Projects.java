@@ -23,7 +23,7 @@ public class Projects {
 	private String url;
 	private String demoURL;
 	private String skills;
-	// private String message;
+	private String message;
 	public String getProfileId() {
 		return profileId;
 	}
@@ -108,4 +108,11 @@ public class Projects {
 	public void setSkills(String skills) {
 		this.skills = skills;
 	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
 }

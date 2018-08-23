@@ -18,7 +18,7 @@ public class Certificates {
 	private String authority;
 	private String duration;
 	private String skillsTested;
-	// private String message;
+	private String message;
 	public String getProfileId() {
 		return profileId;
 	}
@@ -54,6 +54,12 @@ public class Certificates {
 	}
 	public void setSkillsTested(String skillsTested) {
 		this.skillsTested = skillsTested;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 
