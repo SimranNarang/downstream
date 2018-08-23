@@ -169,7 +169,7 @@ public class UserServiceImpl implements UserService{
 			list = new ArrayList<>();
 		else
 			list = user.getSkills();
-
+		skill.setMessage("save");
 		list.remove(skill);
 		user.setSkills(list);
 		userRepo.save(user);
