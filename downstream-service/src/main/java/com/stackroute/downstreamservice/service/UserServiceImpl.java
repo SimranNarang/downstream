@@ -144,13 +144,6 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	/*	-------delete services for each microservice chicklet--------*/
-	
-
-//	@Override
-//	public User updateEntry(User user, String username) {
-//			user.setUsername(username);
-//			return userRepo.save(user);
-//	}
 
 	@Override
 	public void deleteCertificate(Certificates certificate) {
@@ -244,9 +237,55 @@ public class UserServiceImpl implements UserService{
 		userRepo.save(user);
 	}
 
+	/*	-------update services for each microservice chicklet--------*/
+
+//	@Override
+//	public User updateEntry(User user, String username) {
+//			user.setUsername(username);
+//			return userRepo.save(user);
+//	}
+	
 	@Override
-	public User updateEntry(User user, String ProfileId) {
+	public void updateCertificate(Certificates certificate) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
+
+	@Override
+	public void updateSkill(Skills skills) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateProject(Projects project) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePersonalInfo(PersonalInfo personalInfo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateAcademies(AcademicQualification academies) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateExperience(Experience experience) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

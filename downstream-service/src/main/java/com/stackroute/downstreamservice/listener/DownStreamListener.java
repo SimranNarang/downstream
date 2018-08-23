@@ -82,8 +82,11 @@ public class DownStreamListener {
 		if(experience.getMessage().equals("save")) {
 			userService.saveExperience(experience);
 		}
-		else if(experience.getMessage().equals("delete")){
+		else if(experience.getMessage().equals("delete")) {
 			userService.deleteExperience(experience);
+		}
+		else if(experience.getMessage().equals("update")) {
+			userService.updateExperience(experience);
 		}
 	}
 
@@ -95,7 +98,13 @@ public class DownStreamListener {
 		 */
 		if(academies.getMessage().equals("save")) {
 			userService.saveAcademies(academies);
-		}		
+		}
+		else if(academies.getMessage().equals("delete")) {
+			userService.deleteAcademies(academies);
+		}
+		else if(academies.getMessage().equals("update")) {
+			userService.updateAcademies(academies);
+		}
 	}
 
 	@StreamListener(LocationStream.INPUT)
@@ -110,7 +119,9 @@ public class DownStreamListener {
 		else if(location.getMessage().equals("delete")) {
 			userService.deleteLocation(location);
 		}
-		
+		else if(location.getMessage().equals("update")) {
+			userService.updateLocation(location);
+		}
 	}
 
 	@StreamListener(PersonalInfoStream.INPUT)
@@ -122,7 +133,9 @@ public class DownStreamListener {
 		if(personalInfo.getMessage().equals("save")) {
 			userService.savePersonalInfo(personalInfo);
 		}
-		
+		else if(personalInfo.getMessage().equals("update")) {
+			userService.updatePersonalInfo(personalInfo);
+		}
 	}
 
 	@StreamListener(ProjectStream.INPUT)
@@ -137,7 +150,9 @@ public class DownStreamListener {
 		else if(project.getMessage().equals("delete")){
 			userService.deleteProject(project);
 		}
-		
+		else if(project.getMessage().equals("update")) {
+			userService.updateProject(project);
+		}
 	}
 
 	@StreamListener(SkillsStream.INPUT)
@@ -151,6 +166,9 @@ public class DownStreamListener {
 		}
 		else if(skills.getMessage().equals("delete")) {
 			userService.deleteSkill(skills);
+		}
+		else if(skills.getMessage().equals("update")) {
+			userService.updateSkill(skills);
 		}
 		
 	}
@@ -166,6 +184,9 @@ public class DownStreamListener {
 		}	
 		else if(certificates.getMessage().equals("delete")) {
 			userService.deleteCertificate(certificates);
+		}
+		else if(certificates.getMessage().equals("update")) {
+			userService.updateCertificate(certificates);
 		}
 	}
 	

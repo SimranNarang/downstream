@@ -25,5 +25,11 @@ public interface UserService {
 	public void deleteAcademies(AcademicQualification academies);
 	public void deleteExperience(Experience experience);
 	
-	public User updateEntry(User user, String ProfileId);
+	public void updateCertificate(Certificates certificate);
+	public void updateSkill(Skills skills);
+	public void updateProject(Projects project);
+	public void updatePersonalInfo(PersonalInfo personalInfo);
+	public void updateLocation(Location location);
+	public void updateAcademies(AcademicQualification academies);
+	public void updateExperience(Experience experience);
 }
