@@ -73,8 +73,9 @@ public class DownStreamListener {
 	 * userRepository; this.user = user; }
 	 */
 	@Autowired
-	public DownStreamListener(UserRepository userRepo) {
+	public DownStreamListener(UserRepository userRepo,UserService userService) {
 		this.userRepo = userRepo;
+		this.userService = userService;
 	}
 
 	@StreamListener(ExperienceStream.INPUT)
