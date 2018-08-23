@@ -154,7 +154,7 @@ public class UserServiceImpl implements UserService{
 			list = new ArrayList<>();
 		else
 			list = user.getCertificates();
-
+		certificate.setMessage("save");
 		list.remove(certificate);
 		user.setCertificates(list);
 		user.setUsername(certificate.getProfileId());
