@@ -163,22 +163,21 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteSkill(Skills skill) {
+		logger.info(skill.toString()+" Skills");
 		opt = userRepo.findById(skill.getProfileId());
 		user = opt.get();
-		List<Skills> list;
-		if (user.getSkills() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getSkills();
+		List<Skills> list = user.getSkills();
+//		System.out.println(list);
 		for (Skills skills : list) {
-			if (skills.getSkill().equals(skill.getSkill())) {
+			if (skills.getSkill().equalsIgnoreCase(skill.getSkill())) {
 				list.remove(skills);
+				break;
 			}
 		}
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).toString());
-		}
-		System.out.println(list.size());
+//		for (int i = 0; i < list.size(); i++) {
+//			System.out.println(list.get(i).toString());
+//		}
+//		System.out.println(list.size());
 		user.setSkills(list);
 		userRepo.save(user);
 	}
