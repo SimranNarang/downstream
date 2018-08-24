@@ -20,8 +20,8 @@ import com.stackroute.downstreamservice.model.User;
 import com.stackroute.downstreamservice.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	private UserRepository userRepo;
 	private Optional<User> opt;
 	private User user;
@@ -32,9 +32,9 @@ public class UserServiceImpl implements UserService{
 		super();
 		this.userRepo = userRepo;
 	}
-	
-/*	-------save services for each microservice chicklet--------*/
-	
+
+	/* -------save services for each microservice chicklet-------- */
+
 	@Override
 	public void saveCertificate(Certificates certificates) {
 		opt = userRepo.findById(certificates.getProfileId());
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService{
 			list = new ArrayList<>();
 		else
 			list = user.getSkills();
-		
+
 		list.add(skills);
 		user.setSkills(list);
 		userRepo.save(user);
@@ -142,8 +142,8 @@ public class UserServiceImpl implements UserService{
 		user.setUsername(experience.getProfileId());
 		userRepo.save(user);
 	}
-	
-	/*	-------delete services for each microservice chicklet--------*/
+
+	/* -------delete services for each microservice chicklet-------- */
 
 	@Override
 	public void deleteCertificate(Certificates certificate) {
@@ -158,7 +158,8 @@ public class UserServiceImpl implements UserService{
 		System.out.println(list);
 		user.setCertificates(list);
 		user.setUsername(certificate.getProfileId());
-		userRepo.save(user);	}
+		userRepo.save(user);
+	}
 
 	@Override
 	public void deleteSkill(Skills skill) {
@@ -169,12 +170,12 @@ public class UserServiceImpl implements UserService{
 			list = new ArrayList<>();
 		else
 			list = user.getSkills();
-			for (Skills skills : list) {
-			if(skills.getSkill().equals(skill.getSkill())) {
+		for (Skills skills : list) {
+			if (skills.getSkill().equals(skill.getSkill())) {
 				list.remove(skills);
 			}
 		}
-		for(int i=0;i<list.size();i++) {
+		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).toString());
 		}
 		System.out.println(list.size());
@@ -226,7 +227,7 @@ public class UserServiceImpl implements UserService{
 		user.setAcademics(list);
 		logger.info(academies.toString() + " academies");
 		userRepo.save(user);
-		
+
 	}
 
 	@Override
@@ -244,55 +245,54 @@ public class UserServiceImpl implements UserService{
 		userRepo.save(user);
 	}
 
-	/*	-------update services for each microservice chicklet--------*/
+	/* -------update services for each microservice chicklet-------- */
 
-//	@Override
-//	public User updateEntry(User user, String username) {
-//			user.setUsername(username);
-//			return userRepo.save(user);
-//	}
-	
+	// @Override
+	// public User updateEntry(User user, String username) {
+	// user.setUsername(username);
+	// return userRepo.save(user);
+	// }
+
 	@Override
 	public void updateCertificate(Certificates certificate) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateSkill(Skills skills) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateProject(Projects project) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updatePersonalInfo(PersonalInfo personalInfo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateLocation(Location location) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateAcademies(AcademicQualification academies) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateExperience(Experience experience) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 }
