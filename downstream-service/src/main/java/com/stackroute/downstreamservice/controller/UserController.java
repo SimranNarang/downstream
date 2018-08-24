@@ -27,16 +27,9 @@ public class UserController {
 		this.userRepo = userRepo;
 	}
 
-	@GetMapping("/")
-	public ResponseEntity<?> test() {
-		System.out.println("working fine.");
-		return null;
-	}
-
 	@GetMapping("/user/{username}")
 	public ResponseEntity<?> getUser(@PathVariable("username") String username) {
 
-		System.out.println("sdf");
 		return new ResponseEntity<Optional<User>>(userRepo.findById(username), HttpStatus.OK);
 
 	}

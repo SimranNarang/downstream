@@ -149,13 +149,14 @@ public class UserServiceImpl implements UserService {
 	public void deleteCertificate(Certificates certificate) {
 		opt = userRepo.findById(certificate.getProfileId());
 		user = opt.get();
-		List<Certificates> list;
-		if (user.getCertificates() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getCertificates();
-		list.remove(certificate);
-		System.out.println(list);
+		List<Certificates> list = user.getCertificates();
+		for (Certificates cert : list) {
+			if(cert.getTrainingId().equalsIgnoreCase(certificate.getTrainingId())) {
+				list.remove(cert);
+				break;
+			}
+		}
+
 		user.setCertificates(list);
 		user.setUsername(certificate.getProfileId());
 		userRepo.save(user);
@@ -167,33 +168,27 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(skill.getProfileId());
 		user = opt.get();
 		List<Skills> list = user.getSkills();
-//		System.out.println(list);
 		for (Skills skills : list) {
 			if (skills.getSkill().equalsIgnoreCase(skill.getSkill())) {
 				list.remove(skills);
 				break;
 			}
 		}
-//		for (int i = 0; i < list.size(); i++) {
-//			System.out.println(list.get(i).toString());
-//		}
-//		System.out.println(list.size());
 		user.setSkills(list);
 		userRepo.save(user);
 	}
 
 	@Override
 	public void deleteProject(Projects project) {
-		List<Projects> list;
+		List<Projects> list = user.getProject();
 		opt = userRepo.findById(project.getProfileId());
 		user = opt.get();
-
-		if (user.getProject() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getProject();
-
-		list.remove(project);
+		for (Projects proj : list) {
+			if(proj.getProjectId().equalsIgnoreCase(project.getProjectId())) {
+				list.remove(proj);
+				break;
+			}
+		}
 		user.setProject(list);
 		userRepo.save(user);
 	}
@@ -259,9 +254,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateSkill(Skills skills) {
-		// TODO Auto-generated method stub
-
+	public void updateSkill(Skills skill) {
+		logger.info(skill.toString()+" Skills");
+		opt = userRepo.findById(skill.getProfileId());
+		user = opt.get();
+		List<Skills> list = user.getSkills();
+		for (Skills skills : list) {
+			if (skills.getSkill().equalsIgnoreCase(skill.getSkill())) {
+				list.remove(skills);
+				break;
+			}
+		}
+		list.add(skill);
+		user.setSkills(list);
+		userRepo.save(user);
 	}
 
 	@Override
