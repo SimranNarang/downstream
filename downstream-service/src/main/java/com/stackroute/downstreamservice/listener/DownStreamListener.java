@@ -107,9 +107,11 @@ public class DownStreamListener {
 		 */
 		if (location.getMessage().equals("save")) {
 			userService.saveLocation(location);
-		} else if (location.getMessage().equals("delete")) {
+		}
+		
+		  else if (location.getMessage().contains("delete")) {
 			userService.deleteLocation(location);
-		} else if (location.getMessage().equals("update")) {
+		} else if (location.getMessage().contains("update")) {
 			userService.updateLocation(location);
 		}
 	}

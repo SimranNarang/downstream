@@ -168,12 +168,8 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(skill.getProfileId());
 		user = opt.get();
 		List<Skills> list = user.getSkills();
-		for (Skills skills : list) {
-			if (skills.getSkill().equalsIgnoreCase(skill.getSkill())) {
-				list.remove(skills);
-				break;
-			}
-		}
+		int index = Integer.parseInt(skill.getMessage().substring(6));
+		list.remove(index);
 		user.setSkills(list);
 		userRepo.save(user);
 	}
@@ -199,12 +195,8 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(location.getProfileId());
 		user = opt.get();
 		List<Location> list = user.getLocation();
-		for (Location loc : list) {
-			if(loc.getAddress().equalsIgnoreCase(location.getAddress())) {
-				list.remove(loc);
-				break;
-			}
-		}
+		int index = Integer.parseInt(location.getMessage().substring(6));
+		list.remove(index);
 		user.setLocation(list);
 		userRepo.save(user);
 	}
@@ -214,12 +206,8 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(academies.getProfileId());
 		user = opt.get();
 		List<AcademicQualification> list = user.getAcademics();
-		for(AcademicQualification acad : list) {
-			if(acad.getStream().equalsIgnoreCase(academies.getStream())) {
-				list.remove(acad);
-				break;
-			}
-		}
+		int index = Integer.parseInt(academies.getMessage().substring(6));
+		list.remove(index);
 		user.setAcademics(list);
 		logger.info(academies.toString() + " academies");
 		userRepo.save(user);
@@ -231,12 +219,8 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(experience.getProfileId());
 		user = opt.get();
 		List<Experience> list = user.getExperience();
-		for(Experience exp : list) {
-			if(exp.getStartDate().equalsIgnoreCase(experience.getStartDate())) {
-				list.remove(exp);
-				break;
-			}
-		}
+		int index = Integer.parseInt(experience.getMessage().substring(6));
+		list.remove(index);
 		user.setExperience(list);
 		user.setUsername(experience.getProfileId());
 		userRepo.save(user);
@@ -268,12 +252,8 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(skill.getProfileId());
 		user = opt.get();
 		List<Skills> list = user.getSkills();
-		for (Skills skills : list) {
-			if (skills.getSkill().equalsIgnoreCase(skill.getSkill())) {
-				list.remove(skills);
-				break;
-			}
-		}
+		int index = Integer.parseInt(skill.getMessage().substring(6));
+		list.remove(index);
 		skill.setMessage("save");
 		list.add(skill);
 		user.setSkills(list);
@@ -312,12 +292,8 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(location.getProfileId());
 		user = opt.get();
 		List<Location> list = user.getLocation();
-		for (Location loc : list) {
-			if(loc.getAddress().equalsIgnoreCase(location.getAddress())) {
-				list.remove(loc);
-				break;
-			}
-		}
+		int index = Integer.parseInt(location.getMessage().substring(6));
+		list.remove(index);
 		location.setMessage("save");
 		list.add(location);
 		user.setLocation(list);
@@ -329,12 +305,8 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(academies.getProfileId());
 		user = opt.get();
 		List<AcademicQualification> list = user.getAcademics();
-		for(AcademicQualification acad : list) {
-			if(acad.getStream().equalsIgnoreCase(academies.getStream())) {
-				list.remove(acad);
-				break;
-			}
-		}
+		int index = Integer.parseInt(academies.getMessage().substring(6));
+		list.remove(index);
 		academies.setMessage("save");
 		list.add(academies);
 		user.setAcademics(list);
@@ -347,12 +319,8 @@ public class UserServiceImpl implements UserService {
 		opt = userRepo.findById(experience.getProfileId());
 		user = opt.get();
 		List<Experience> list = user.getExperience();
-		for(Experience exp : list) {
-			if(exp.getStartDate().equalsIgnoreCase(experience.getStartDate())) {
-				list.remove(exp);
-				break;
-			}
-		}
+		int index = Integer.parseInt(experience.getMessage().substring(6));
+		list.remove(index);
 		experience.setMessage("save");
 		list.add(experience);
 		user.setExperience(list);
