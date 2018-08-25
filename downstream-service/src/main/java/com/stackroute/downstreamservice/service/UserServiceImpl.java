@@ -197,13 +197,13 @@ public class UserServiceImpl implements UserService {
 	public void deleteLocation(Location location) {
 		opt = userRepo.findById(location.getProfileId());
 		user = opt.get();
-		List<Location> list;
-		if (user.getLocation() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getLocation();
-
-		list.remove(location);
+		List<Location> list = user.getLocation();
+		for (Location loc : list) {
+			if(loc.getAddress().equalsIgnoreCase(location.getAddress())) {
+				list.remove(loc);
+				break;
+			}
+		}
 		user.setLocation(list);
 		userRepo.save(user);
 	}
@@ -212,12 +212,13 @@ public class UserServiceImpl implements UserService {
 	public void deleteAcademies(AcademicQualification academies) {
 		opt = userRepo.findById(academies.getProfileId());
 		user = opt.get();
-		List<AcademicQualification> list;
-		if (user.getExperience() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getAcademics();
-		list.remove(academies);
+		List<AcademicQualification> list = user.getAcademics();
+		for(AcademicQualification acad : list) {
+			if(acad.getStream().equalsIgnoreCase(academies.getStream())) {
+				list.remove(acad);
+				break;
+			}
+		}
 		user.setAcademics(list);
 		logger.info(academies.toString() + " academies");
 		userRepo.save(user);
@@ -228,24 +229,19 @@ public class UserServiceImpl implements UserService {
 	public void deleteExperience(Experience experience) {
 		opt = userRepo.findById(experience.getProfileId());
 		user = opt.get();
-		List<Experience> list;
-		if (user.getExperience() == null)
-			list = new ArrayList<>();
-		else
-			list = user.getExperience();
-		list.remove(experience);
+		List<Experience> list = user.getExperience();
+		for(Experience exp : list) {
+			if(exp.getStartDate().equalsIgnoreCase(experience.getStartDate())) {
+				list.remove(exp);
+				break;
+			}
+		}
 		user.setExperience(list);
 		user.setUsername(experience.getProfileId());
 		userRepo.save(user);
 	}
 
 	/* -------update services for each microservice chicklet-------- */
-
-	// @Override
-	// public User updateEntry(User user, String username) {
-	// user.setUsername(username);
-	// return userRepo.save(user);
-	// }
 
 	@Override
 	public void updateCertificate(Certificates certificate) {
@@ -265,6 +261,7 @@ public class UserServiceImpl implements UserService {
 				break;
 			}
 		}
+		skill.setMessage("save");
 		list.add(skill);
 		user.setSkills(list);
 		userRepo.save(user);
