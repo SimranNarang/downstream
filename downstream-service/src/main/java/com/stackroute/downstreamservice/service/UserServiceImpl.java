@@ -195,6 +195,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteLocation(Location location) {
+		System.out.println("deleting");
 		opt = userRepo.findById(location.getProfileId());
 		user = opt.get();
 		List<Location> list = user.getLocation();
@@ -245,8 +246,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateCertificate(Certificates certificate) {
-		// TODO Auto-generated method stub
-
+		logger.info(certificate.toString()+" Certificates");
+		opt = userRepo.findById(certificate.getProfileId());
+		user = opt.get();
+		List<Certificates> list = user.getCertificates();
+		for (Certificates cert : list) {
+			if(cert.getTrainingId().equalsIgnoreCase(certificate.getTrainingId())) {
+				list.remove(cert);
+				break;
+			}
+		}
+		certificate.setMessage("save");
+		list.add(certificate);
+		user.setCertificates(list);
+		userRepo.save(user);
 	}
 
 	@Override
@@ -269,32 +282,82 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateProject(Projects project) {
-		// TODO Auto-generated method stub
-
+		List<Projects> list = user.getProject();
+		opt = userRepo.findById(project.getProfileId());
+		user = opt.get();
+		for (Projects proj : list) {
+			if(proj.getProjectId().equalsIgnoreCase(project.getProjectId())) {
+				list.remove(proj);
+				break;
+			}
+		}
+		project.setMessage("save");
+		list.add(project);
+		user.setProject(list);
+		userRepo.save(user);
 	}
 
 	@Override
 	public void updatePersonalInfo(PersonalInfo personalInfo) {
-		// TODO Auto-generated method stub
+		user.setPersonalInfo(personalInfo);
+		user.setUsername(personalInfo.getProfileId());
+		userRepo.save(user);
 
+		logger.info(personalInfo.toString() + " personal info");
 	}
 
 	@Override
 	public void updateLocation(Location location) {
-		// TODO Auto-generated method stub
-
+		System.out.println("updating");
+		opt = userRepo.findById(location.getProfileId());
+		user = opt.get();
+		List<Location> list = user.getLocation();
+		for (Location loc : list) {
+			if(loc.getAddress().equalsIgnoreCase(location.getAddress())) {
+				list.remove(loc);
+				break;
+			}
+		}
+		location.setMessage("save");
+		list.add(location);
+		user.setLocation(list);
+		userRepo.save(user);
 	}
 
 	@Override
 	public void updateAcademies(AcademicQualification academies) {
-		// TODO Auto-generated method stub
-
+		opt = userRepo.findById(academies.getProfileId());
+		user = opt.get();
+		List<AcademicQualification> list = user.getAcademics();
+		for(AcademicQualification acad : list) {
+			if(acad.getStream().equalsIgnoreCase(academies.getStream())) {
+				list.remove(acad);
+				break;
+			}
+		}
+		academies.setMessage("save");
+		list.add(academies);
+		user.setAcademics(list);
+		logger.info(academies.toString() + " academies");
+		userRepo.save(user);
 	}
 
 	@Override
 	public void updateExperience(Experience experience) {
-		// TODO Auto-generated method stub
-
+		opt = userRepo.findById(experience.getProfileId());
+		user = opt.get();
+		List<Experience> list = user.getExperience();
+		for(Experience exp : list) {
+			if(exp.getStartDate().equalsIgnoreCase(experience.getStartDate())) {
+				list.remove(exp);
+				break;
+			}
+		}
+		experience.setMessage("save");
+		list.add(experience);
+		user.setExperience(list);
+		user.setUsername(experience.getProfileId());
+		userRepo.save(user);
 	}
 
 }
